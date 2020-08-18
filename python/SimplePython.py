@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import thread
 from time import sleep
 from Tkinter import *
 from matplotlib.colors import is_color_like
@@ -9,6 +8,12 @@ from matplotlib.colors import is_color_like
 def SimpleClear():
     if 0 != os.system('cls || clear'):
         print('\n' * 100)
+
+
+def SimpleBeep():
+    sys.stdout.write('\a')
+    sys.stdout.flush()
+
 
 #def SimpleDim( x, y=0, z=0 ):
 #    if y < 1:
@@ -34,8 +39,9 @@ scale=None
 WIDTH=360
 HEIGHT=240
 image_on_canvas=None
+eventQueue=None
 
-def SimpleGr(fg='yellow', bg='blue', bd='cyan'):
+def SimpleGrClose():
     global root
     global canvas
     global fg_color
@@ -43,17 +49,46 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan'):
     global frame
     global images
     global image_on_canvas
+    global eventQueue
+    if root is not None:
+        root.destroy()
+    root=None
+    canvas=None
+    fg_color=None
+    scale=None
+    frame=None
+    images=None
+    image_on_canvas=None
+    eventQueue=None
+
+def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
+    global root
+    global canvas
+    global fg_color
+    global scale
+    global frame
+    global images
+    global image_on_canvas
+    global eventQueue
+    if root is not None:
+        SimpleGrClose()
+
     fg_color=fg
+    eventQueue=[]
 
     def key(event):
-        print "pressed", repr(event.char)
+        eventQueue.append({ 'type':'key', 'char':event.char })
 
     def mouseButton(event):
-        print "clicked at", event.x, event.y
+        eventQueue.append({ 'type':'click', 'x':event.x//scale, 'y':event.y//scale })
         canvas.focus_set()
+
+    def onExit(event=None):
+        SimpleGrClose()
 
     root = Tk()
     root.configure(bg=bd)
+    root.title(title)
 
     w, h = root.winfo_screenwidth(), root.winfo_screenheight()
 
@@ -79,12 +114,18 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan'):
 
     canvas.bind("<Key>", key)
     canvas.bind("<Button-1>", mouseButton)
+    root.bind('<Escape>', onExit)
+    root.protocol("WM_DELETE_WINDOW", onExit)
 
     root.update()
 
 
+
+
 def SimpleGrColor(fg=None, bg=None, bd=None):
     global fg_color
+    if root is None:
+        return
     if is_color_like(fg):
         fg_color=fg
     if is_color_like(bg):
@@ -93,30 +134,45 @@ def SimpleGrColor(fg=None, bg=None, bd=None):
         root.configure(bg=bd)
 
 def SimpleGrPlot( x, y, x2 = None, y2 = None):
+    if root is None:
+        return
     if x2 is None:
         x2, y2 = x+1, y+1
     images[frame].put(fg_color, (x*scale,y*scale,x2*scale,y2*scale))
 
 def SimpleGrFlipFrameCopy():
     global frame
+    if root is None:
+        return
     canvas.itemconfig(image_on_canvas, image = images[frame])
     root.update()
+    if root is None:
+        return
     frame=not frame
     images[frame]=images[not frame].copy()
 
 def SimpleGrFlipFrameBlank():
     global frame
+    if root is None:
+        return
     canvas.itemconfig(image_on_canvas, image = images[frame])
     root.update()
+    if root is None:
+        return
     frame=not frame
     images[frame].blank()
 
 def SimpleGrExit():
-    root.mainloop()
+    if root is not None:
+        root.mainloop()
     exit(0)
 
-def SimpleBeep():
-    sys.stdout.write('\a')
+def SimpleGrPollEvent():
+    if root is not None:
+        root.update()
+        if eventQueue is not None and len(eventQueue) > 0:
+            return eventQueue.pop(0)
+    return None
 
 
 # Main Program unit tests for library
@@ -135,6 +191,7 @@ if __name__ == "__main__":
     a = SimpleDim( 5, 4, 3 )
     print(a)
 
+    SimpleGrColor('Saddlebrown')
 
     SimpleBeep()
 
@@ -180,6 +237,13 @@ if __name__ == "__main__":
     print(root.winfo_rgb('Saddlebrown'))
     print(root.winfo_rgb('#FFFF00'))
 
+    x=None
+    while x is None or x['type'] != 'key' or x['char'] != 'q' :
+        x = SimpleGrPollEvent()
+        if x is not None:
+            print(x)
+
+    SimpleGrFlipFrameBlank()
     SimpleGrExit()
 
 
