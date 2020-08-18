@@ -115,11 +115,17 @@ def SimpleGrExit():
     root.mainloop()
     exit(0)
 
+def SimpleBeep():
+    sys.stdout.write('\a')
+
+
 # Main Program unit tests for library
 if __name__ == "__main__":
 
     # Test Screen Clear
     SimpleClear()
+
+
 
     # Create 1, 2 and 3 dimensional lists
     a = SimpleDim( 5 )
@@ -129,8 +135,12 @@ if __name__ == "__main__":
     a = SimpleDim( 5, 4, 3 )
     print(a)
 
+
+    SimpleBeep()
+
     # Test Graphics mode
     SimpleGr()
+
 
     SimpleGrPlot( 0, 0 )
     SimpleGrPlot( 0, 1 )
