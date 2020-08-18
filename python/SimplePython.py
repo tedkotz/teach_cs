@@ -168,7 +168,9 @@ def SimpleGrExit():
     exit(0)
 
 def SimpleGrPollEvent():
-    if root is not None:
+    if root is None:
+        return { 'type':'exit' }
+    else:
         root.update()
         if eventQueue is not None and len(eventQueue) > 0:
             return eventQueue.pop(0)
@@ -237,11 +239,41 @@ if __name__ == "__main__":
     print(root.winfo_rgb('Saddlebrown'))
     print(root.winfo_rgb('#FFFF00'))
 
-    x=None
-    while x is None or x['type'] != 'key' or x['char'] != 'q' :
-        x = SimpleGrPollEvent()
-        if x is not None:
-            print(x)
+    x=WIDTH/2
+    y=HEIGHT/2
+    run=True
+    while run:
+        ev = SimpleGrPollEvent()
+        if ev is not None:
+            print(ev)
+            if ev['type'] == 'exit':
+                run = False
+            elif ev['type'] == 'key':
+                if ev['char'] == 'q' :
+                    run = False
+                elif ev['char'] == 'w' :
+                    y=y-1
+                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrFlipFrameBlank()
+                elif ev['char'] == 'a' :
+                    x=x-1
+                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrFlipFrameBlank()
+                elif ev['char'] == 's' :
+                    y=y+1
+                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrFlipFrameBlank()
+                elif ev['char'] == 'd' :
+                    x=x+1
+                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrFlipFrameBlank()
+            elif ev['type'] == 'click':
+                    x=ev['x']
+                    y=ev['y']
+                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleBeep()
+                    SimpleGrFlipFrameBlank()
+
 
     SimpleGrFlipFrameBlank()
     SimpleGrExit()
