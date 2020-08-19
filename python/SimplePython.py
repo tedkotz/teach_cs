@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-from time import sleep
 from Tkinter import *
 from matplotlib.colors import is_color_like
 
@@ -30,14 +29,16 @@ def SimpleDim( *args ):
         return([0 if rest is () else loop(rest)]*head)
     return loop( args )
 
+
+WIDTH=360
+HEIGHT=240
+
 root=None
 canvas=None
 frame=None
 images=None
 fg_color=None
 scale=None
-WIDTH=360
-HEIGHT=240
 image_on_canvas=None
 eventQueue=None
 
@@ -102,8 +103,9 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
     px_w = WIDTH*scale
     px_h = HEIGHT*scale
 
-    canvas = Canvas( root, width=px_w, height=px_h, bg=bg, bd=0)
+    canvas = Canvas( root, width=px_w, height=px_h, bg=bg, bd=0, highlightthickness=0, insertwidth=0, selectborderwidth=0, insertborderwidth=0 )
     canvas.place(relx=0.5, rely=0.5, anchor=CENTER)
+    canvas.focus_set()
 
     images= {}
 
@@ -133,12 +135,14 @@ def SimpleGrColor(fg=None, bg=None, bd=None):
     if is_color_like(bd):
         root.configure(bg=bd)
 
-def SimpleGrPlot( x, y, x2 = None, y2 = None):
-    if root is None:
-        return
+def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
     if x2 is None:
         x2, y2 = x+1, y+1
-    images[frame].put(fg_color, (x*scale,y*scale,x2*scale,y2*scale))
+    x, y, x2, y2 = min(max(min(x, x2),0),WIDTH), min(max(min(y, y2),0),HEIGHT), min(max(max(x, x2),0),WIDTH), min(max(max(y, y2),0),HEIGHT)
+    if color is None:
+        color=fg_color
+    if root is not None and is_color_like(color):
+        images[frame].put(color, (x*scale,y*scale,x2*scale,y2*scale))
 
 def SimpleGrFlipFrameCopy():
     global frame
@@ -179,10 +183,10 @@ def SimpleGrPollEvent():
 
 # Main Program unit tests for library
 if __name__ == "__main__":
+    from time import sleep
 
     # Test Screen Clear
     SimpleClear()
-
 
 
     # Create 1, 2 and 3 dimensional lists
@@ -200,11 +204,18 @@ if __name__ == "__main__":
     # Test Graphics mode
     SimpleGr()
 
+    #help(Canvas)
+    #print( canvas.config())
+    #exit(0)
 
     SimpleGrPlot( 0, 0 )
     SimpleGrPlot( 0, 1 )
     SimpleGrPlot( 1, 0 )
     SimpleGrPlot( 1, 1 )
+
+    SimpleGrPlot( 20, 20, 0, 0 )
+
+    SimpleGrPlot( 50, 20, 30, -1 )
 
     for x in range(WIDTH):
         #y = int(HEIGHT/2 + HEIGHT/4 * sin(x/30.0))
@@ -229,7 +240,7 @@ if __name__ == "__main__":
     SimpleGrFlipFrameCopy()
     SimpleGrPlot( 2, 2,  100, 100)
     SimpleGrColor('magenta')
-    SimpleGrPlot( 50, 50,  150, 150)
+    SimpleGrPlot( 150, 150, 50, 50)
     sleep(2)
     print( 3 )
     SimpleGrFlipFrameBlank()
@@ -239,6 +250,8 @@ if __name__ == "__main__":
     print(root.winfo_rgb('Saddlebrown'))
     print(root.winfo_rgb('#FFFF00'))
 
+
+    print("USE WASD or mouse to move around, Q to quit.")
     x=WIDTH/2
     y=HEIGHT/2
     run=True
@@ -253,28 +266,30 @@ if __name__ == "__main__":
                     run = False
                 elif ev['char'] == 'w' :
                     y=y-1
-                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrPlot( x, y,  x-10, y-10)
                     SimpleGrFlipFrameBlank()
                 elif ev['char'] == 'a' :
                     x=x-1
-                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrPlot( x, y,  x-10, y-10)
                     SimpleGrFlipFrameBlank()
                 elif ev['char'] == 's' :
                     y=y+1
-                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrPlot( x, y,  x-10, y-10)
                     SimpleGrFlipFrameBlank()
                 elif ev['char'] == 'd' :
                     x=x+1
-                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrPlot( x, y,  x-10, y-10)
                     SimpleGrFlipFrameBlank()
             elif ev['type'] == 'click':
                     x=ev['x']
                     y=ev['y']
-                    SimpleGrPlot( x, y,  x+10, y+10)
+                    SimpleGrPlot( x, y,  x-10, y-10)
                     SimpleBeep()
                     SimpleGrFlipFrameBlank()
 
 
+    SimpleGrFlipFrameBlank()
+    SimpleGrPlot(0,0,WIDTH,HEIGHT)
     SimpleGrFlipFrameBlank()
     SimpleGrExit()
 
