@@ -4,11 +4,13 @@ import os
 from Tkinter import *
 from matplotlib.colors import is_color_like
 
+
+# Clears screen
 def SimpleClear():
     if 0 != os.system('cls || clear'):
         print('\n' * 100)
 
-
+# Makes computer beep
 def SimpleBeep():
     sys.stdout.write('\a')
     sys.stdout.flush()
@@ -22,15 +24,16 @@ def SimpleBeep():
 #    else:
 #        return([[[0]*z]*y]*x)
 
-
+# Returns multidimentional list of zeros
 def SimpleDim( *args ):
     def loop( lengths ):
         head, rest = lengths[0], lengths[1:]
         return([0 if rest is () else loop(rest)]*head)
     return loop( args )
 
-
+# User Addressable Width of Graphics Mode Display
 WIDTH=360
+# User Addressable Height of Graphics Mode Display
 HEIGHT=240
 
 root=None
@@ -42,6 +45,7 @@ scale=None
 image_on_canvas=None
 eventQueue=None
 
+# Closes and cleans up Graphics Mode
 def SimpleGrClose():
     global root
     global canvas
@@ -62,6 +66,7 @@ def SimpleGrClose():
     image_on_canvas=None
     eventQueue=None
 
+# Starts graphics mode
 def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
     global root
     global canvas
@@ -77,12 +82,11 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
     fg_color=fg
     eventQueue=[]
 
-    def key(event):
+    def keyPressed(event):
         eventQueue.append({ 'type':'key', 'char':event.char })
 
     def mouseButton(event):
         eventQueue.append({ 'type':'click', 'x':event.x//scale, 'y':event.y//scale })
-        canvas.focus_set()
 
     def onExit(event=None):
         SimpleGrClose()
@@ -91,21 +95,15 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
     root.configure(bg=bd)
     root.title(title)
 
-    w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+    scale=int(max(1,min(root.winfo_screenwidth()/(WIDTH*2), root.winfo_screenheight()/(HEIGHT*2))))
 
-    scale=int(max(1,min(w/(360*2), h/(240*2))))
-
-    w = 1.1 * scale * 360
-    h = 1.1 * scale * 240
-
-    root.geometry("%dx%d+%d+%d" % (396*scale, 264*scale, 0, 0))
+    root.geometry("%dx%d+%d+%d" % (WIDTH*1.1*scale, HEIGHT*1.1*scale, 0, 0))
 
     px_w = WIDTH*scale
     px_h = HEIGHT*scale
 
     canvas = Canvas( root, width=px_w, height=px_h, bg=bg, bd=0, highlightthickness=0, insertwidth=0, selectborderwidth=0, insertborderwidth=0 )
     canvas.place(relx=0.5, rely=0.5, anchor=CENTER)
-    canvas.focus_set()
 
     images= {}
 
@@ -114,16 +112,15 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
     frame=True
     image_on_canvas=canvas.create_image((px_w/2, px_h/2), image=images[False], state="normal")
 
-    canvas.bind("<Key>", key)
     canvas.bind("<Button-1>", mouseButton)
+    root.bind("<Key>", keyPressed)
     root.bind('<Escape>', onExit)
     root.protocol("WM_DELETE_WINDOW", onExit)
 
     root.update()
 
 
-
-
+# changes UI colors
 def SimpleGrColor(fg=None, bg=None, bd=None):
     global fg_color
     if root is None:
@@ -135,6 +132,7 @@ def SimpleGrColor(fg=None, bg=None, bd=None):
     if is_color_like(bd):
         root.configure(bg=bd)
 
+# Draws to current framebuffer
 def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
     if x2 is None:
         x2, y2 = x+1, y+1
@@ -144,6 +142,7 @@ def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
     if root is not None and is_color_like(color):
         images[frame].put(color, (x*scale,y*scale,x2*scale,y2*scale))
 
+# Displays current framebuffer and starts with a copy of the framebuffer
 def SimpleGrFlipFrameCopy():
     global frame
     if root is None:
@@ -155,6 +154,7 @@ def SimpleGrFlipFrameCopy():
     frame=not frame
     images[frame]=images[not frame].copy()
 
+# Displays current framebuffer and starts with a blank framebuffer
 def SimpleGrFlipFrameBlank():
     global frame
     if root is None:
@@ -166,11 +166,13 @@ def SimpleGrFlipFrameBlank():
     frame=not frame
     images[frame].blank()
 
+# Hands Control off program to UI events
 def SimpleGrExit():
     if root is not None:
         root.mainloop()
     exit(0)
 
+# returns next UI input event, or Exit event if UI closed or None if not
 def SimpleGrPollEvent():
     if root is None:
         return { 'type':'exit' }
@@ -213,7 +215,7 @@ if __name__ == "__main__":
     SimpleGrPlot( 1, 0 )
     SimpleGrPlot( 1, 1 )
 
-    SimpleGrPlot( 20, 20, 0, 0 )
+    SimpleGrPlot( 20, 20, 0, 0, 'green' )
 
     SimpleGrPlot( 50, 20, 30, -1 )
 
