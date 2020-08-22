@@ -4,6 +4,16 @@ import os
 from Tkinter import *
 from matplotlib.colors import is_color_like
 
+# This next part can be use to specify information about he who wrote this code
+# and how they intend others to use it
+__author__ = "<My Name>"
+__copyright__ = "Copyright <Year>, <Owner>"
+__credits__ = ["<My Name>"]
+__license__ = "Public Domain"
+__version__ = "0.0.1a"
+__maintainer__ = "<My Name>"
+__email__ = "<My E-mail>"
+__status__ = "Experimental"
 
 # Clears screen
 def SimpleClear():
