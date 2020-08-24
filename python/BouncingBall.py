@@ -23,13 +23,13 @@ while( running ):
     if x <= 0:
         vx = abs(vx)
         SimpleBeep()
-    elif x >= WIDTH - BALL_SIZE:
+    elif x > WIDTH - BALL_SIZE:
         vx = -abs(vx)
         SimpleBeep()
     if y <= 0:
         vy=abs(vy)
         SimpleBeep()
-    elif y >= HEIGHT - BALL_SIZE:
+    elif y > HEIGHT - BALL_SIZE:
         vy=-abs(vy)
         SimpleBeep()
 
