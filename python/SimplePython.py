@@ -1,8 +1,27 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
-from Tkinter import *
-from matplotlib.colors import is_color_like
+from tkinter import *
+
+COLORS = ['BLACK', 'BROWN', 'RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'VIOLET', 'GRAY', 'WHITE', 'CYAN', 'MAGENTA', 'LIGHTGRAY', 'DIMGRAY', 'TAN', 'INDIGO']
+
+try:
+    from matplotlib.colors import is_color_like, get_named_colors_mapping
+except ImportError:
+    import re
+    def is_color_like( value ):
+        try:
+            value = value.upper()
+            if re.compile(r"^#[0-9A-F]{6}$").match(value):
+                return True
+            elif value in COLORS:
+                return True
+        except:
+            pass
+        return False
+
+
+
 
 # This next part can be use to specify information about he who wrote this code
 # and how they intend others to use it
@@ -150,7 +169,7 @@ def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
     if color is None:
         color=fg_color
     if root is not None and is_color_like(color):
-        images[frame].put(color, (x*scale,y*scale,x2*scale,y2*scale))
+        images[frame].put(color, (int(x*scale),int(y*scale),int(x2*scale),int(y2*scale)))
 
 # Displays current framebuffer and starts with a copy of the framebuffer
 def SimpleGrFlipFrameCopy():
@@ -209,6 +228,13 @@ if __name__ == "__main__":
     a = SimpleDim( 5, 4, 3 )
     print(a)
 
+    print (is_color_like('Saddlebrown'))
+    print (is_color_like('#F0123A'))
+    print (is_color_like('red'))
+    print (is_color_like('marzian'))
+    print (get_named_colors_mapping())
+    print (is_color_like(None))
+
     SimpleGrColor('Saddlebrown')
 
     SimpleBeep()
@@ -251,7 +277,7 @@ if __name__ == "__main__":
     SimpleGrColor('yellow')
     SimpleGrFlipFrameCopy()
     SimpleGrPlot( 2, 2,  100, 100)
-    SimpleGrColor('magenta')
+    SimpleGrColor('tan')
     SimpleGrPlot( 150, 150, 50, 50)
     sleep(2)
     print( 3 )
