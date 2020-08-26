@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+""" """
 
 import os
 from tkinter import *
@@ -41,6 +42,7 @@ def SimpleClear():
 
 # Makes computer beep
 def SimpleBeep():
+    """ """
     sys.stdout.write('\a')
     sys.stdout.flush()
 
@@ -55,6 +57,7 @@ def SimpleBeep():
 
 # Returns multidimentional list of zeros
 def SimpleDim( *args ):
+    """ """
     def loop( lengths ):
         head, rest = lengths[0], lengths[1:]
         return([0 if rest is () else loop(rest)]*head)
@@ -76,6 +79,7 @@ eventQueue=None
 
 # Closes and cleans up Graphics Mode
 def SimpleGrClose():
+    """ """
     global root
     global canvas
     global fg_color
@@ -97,6 +101,7 @@ def SimpleGrClose():
 
 # Starts graphics mode
 def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
+    """ """
     global root
     global canvas
     global fg_color
@@ -151,6 +156,7 @@ def SimpleGr(fg='yellow', bg='blue', bd='cyan', title = "SimplePython"):
 
 # changes UI colors
 def SimpleGrColor(fg=None, bg=None, bd=None):
+    """ """
     global fg_color
     if root is None:
         return
@@ -163,6 +169,7 @@ def SimpleGrColor(fg=None, bg=None, bd=None):
 
 # Draws to current framebuffer
 def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
+    """ """
     if x2 is None:
         x2, y2 = x+1, y+1
     x, y, x2, y2 = min(max(min(x, x2),0),WIDTH), min(max(min(y, y2),0),HEIGHT), min(max(max(x, x2),0),WIDTH), min(max(max(y, y2),0),HEIGHT)
@@ -173,6 +180,7 @@ def SimpleGrPlot( x, y, x2 = None, y2 = None, color = None):
 
 # Displays current framebuffer and starts with a copy of the framebuffer
 def SimpleGrFlipFrameCopy():
+    """ """
     global frame
     if root is None:
         return
@@ -185,6 +193,7 @@ def SimpleGrFlipFrameCopy():
 
 # Displays current framebuffer and starts with a blank framebuffer
 def SimpleGrFlipFrameBlank():
+    """ """
     global frame
     if root is None:
         return
@@ -197,12 +206,14 @@ def SimpleGrFlipFrameBlank():
 
 # Hands Control off program to UI events
 def SimpleGrExit():
+    """ """
     if root is not None:
         root.mainloop()
     exit(0)
 
 # returns next UI input event, or Exit event if UI closed or None if not
 def SimpleGrPollEvent():
+    """ """
     if root is None:
         return { 'type':'exit' }
     else:

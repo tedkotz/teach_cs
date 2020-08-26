@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """ My first python program
 
 This program demonstrates how to do basic console output, and the essential
@@ -38,7 +38,7 @@ __author__ = "<My Name>"
 # |   |  |  triple single (''') or triple double quotes (""").
 # |   |  |
 # \/  \/ \/
-print ( 'Hello, World!' )
+print ( "Hello, World!" )
 # So here, the print function is passed input of a string of text
 # 'Hello, World!' to output on the screen.
 

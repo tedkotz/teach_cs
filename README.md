@@ -2,7 +2,7 @@
 Beginner computer science curriculum based on writing simple games in python with SimplePython library
 
 ## Overview
-With the Pandemic, I was asked for my opion on a curriculum to teach younger children how to program. 
+With the Pandemic, I was asked for my opion on a curriculum to teach younger children how to program.
 I have thought about this topic for a long time so I figured I collect all the information I can in this one place.
 
 The goal is to create an environment similar to the one used to teach BASIC programming in the 1980's. I've always believed all computer science topics
@@ -10,10 +10,10 @@ can be presented through the context of video games, not all of which are super 
 
 ## Choosing the language
 
-The language choice needs to be something simple enough to quickly learn and powerful enough to be really useful. Though I love C, I wanted to with a readily 
+The language choice needs to be something simple enough to quickly learn and powerful enough to be really useful. Though I love C, I wanted to with a readily
 available scripting language. I quickly whittled it down to three choices:
- 
-* JavaScript 
+
+* JavaScript
   * Installed and running everywhere
   * A lot of boiler plate needed to get a basic stdio interface
 * Lua
@@ -23,10 +23,10 @@ available scripting language. I quickly whittled it down to three choices:
 * Python
   * Probably the most popular scripting language for small CLI projects
   * The mandatory white space does encourage good coding practices early.
-  
+
 **WINNER: PYTHON**
 
-Really any of these or any other language would probably be great for this. The real focus is the assignment list, that incrementally builds up a toolbox of essential programming skills.
+Really any of these or any other language would probably be great for this. The real focus is the assignment list, that incrementally builds up a toolbox of essential programming skills. Originally the target was 2/3 compatible python, but the peculiar design decisions in python 2 and the even more peculiar choices that the python 3 change pushed on writing compatible code made python 3 the best option.
 
 ## Excluded Topics
 
