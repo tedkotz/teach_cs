@@ -27,7 +27,7 @@ except ImportError:
 # This next part can be use to specify information about he who wrote this code
 # and how they intend others to use it
 __author__ = "<My Name>"
-__copyright__ = "Copyright <Year>, <Owner>"
+__copyright__ = "Copyright 2020, <Owner>"
 __credits__ = ["<My Name>"]
 __license__ = "Public Domain"
 __version__ = "0.0.1a"
@@ -35,29 +35,19 @@ __maintainer__ = "<My Name>"
 __email__ = "<My E-mail>"
 __status__ = "Experimental"
 
-# Clears screen
 def SimpleClear():
+    """Clears screen."""
     if 0 != os.system('cls || clear'):
         print('\n' * 100)
 
-# Makes computer beep
 def SimpleBeep():
-    """ """
+    """Makes computer beep"""
     sys.stdout.write('\a')
     sys.stdout.flush()
 
 
-#def SimpleDim( x, y=0, z=0 ):
-#    if y < 1:
-#        return([0]*x)
-#    elif z < 1:
-#        return([[0]*y]*x)
-#    else:
-#        return([[[0]*z]*y]*x)
-
-# Returns multidimentional list of zeros
 def SimpleDim( *args ):
-    """ """
+    """Returns multidimentional list of zeros"""
     def loop( lengths ):
         head, rest = lengths[0], lengths[1:]
         return([0 if rest is () else loop(rest)]*head)
@@ -77,9 +67,8 @@ scale=None
 image_on_canvas=None
 eventQueue=None
 
-# Closes and cleans up Graphics Mode
 def SimpleGrClose():
-    """ """
+    """Closes and cleans up Graphics Mode"""
     global root
     global canvas
     global fg_color

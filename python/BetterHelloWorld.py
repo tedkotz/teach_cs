@@ -6,15 +6,15 @@
 __author__ = "<My Name>"
 
 
-# Rather than going straight into the instruction we want it to take,  we put
+# Rather than going straight into the instructions for organization,  we put
 # the instructions inside a block or group of code. And we give that block of
 # code a name. In this case that name is betterHelloWorld. It is followed by a
 # mandatory set of parenthesis.
 #
-# a block of code like this is called a FUNCTION. Sometimes referred to as a
-# procedure, method, or subroutine.
+# A block of code like this is called a FUNCTION. Sometimes referred to as a
+# procedure, method, or subroutine. Similar to print, but we can define our own.
 #
-# There are limitations with the name it can not start with a number or contain
+# There are limitations with the name. It can not start with a number or contain
 # certain special symbols such as :;.,()[]'" or spaces. The lack of spaces in
 # names is why we use this mix of upper and lower case to indicate word
 # boundaries. This is called CamelCase because the up and down humps in the
