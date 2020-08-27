@@ -3,6 +3,18 @@
 
 """
 
+from SimplePython import SimpleClear  # This line gives this program access to
+# additional functionality by importing a new function called SimpleClear from
+# from a MODULE called SimplePython. Modules are a file or set of files that
+# contain additional software to provide extended functionality.
+#
+# This module SimplePython was written to go with this course in order to
+# provide some simple commands to let the course focus on helping you get solid
+# base skills. the file is included with the examples here for review. Though
+# a lot of what it does might not make sense until you get more experience with
+# python.
+
+
 __author__ = "<My Name>"
 
 
@@ -11,7 +23,7 @@ __author__ = "<My Name>"
 # code a name. In this case that name is betterHelloWorld. It is followed by a
 # mandatory set of parenthesis.
 #
-# A block of code like this is called a FUNCTION. Sometimes referred to as a
+# A block of code like this is called a function. Sometimes referred to as a
 # procedure, method, or subroutine. Similar to print, but we can define our own.
 #
 # There are limitations with the name. It can not start with a number or contain
@@ -26,7 +38,11 @@ def betterHelloWorld():
     # These descriptive headers in python are called DOCSTRINGs and as our
     # functions get more complex they will become more expressive.
 
-    # The line that prints the message is still the same
+    SimpleClear() # Command from SimplePython to clear the screen
+    # Sometimes it is nice to clear the screen at the start of a program to
+    # remove any distractions or just neaten up the initial display.
+
+    # The line that prints the message is still the same from HelloWorld
     print ( 'Hello, World!' )
 
     #                 ^
