@@ -3,6 +3,8 @@
 
 """
 
+__author__ = "<My Name>"
+
 from SimplePython import SimpleClear  # This line gives this program access to
 # additional functionality by importing a new function called SimpleClear from
 # from a MODULE called SimplePython. Modules are a file or set of files that
@@ -13,9 +15,6 @@ from SimplePython import SimpleClear  # This line gives this program access to
 # base skills. the file is included with the examples here for review. Though
 # a lot of what it does might not make sense until you get more experience with
 # python.
-
-
-__author__ = "<My Name>"
 
 
 # Rather than going straight into the instructions for organization,  we put

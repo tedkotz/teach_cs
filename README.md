@@ -43,5 +43,15 @@ These generally rely heavily on OOP to understand. They introduce a lot of compl
 This isn't needed and can create renetance issues that are better left for future.
 
 
+Links
+https://www.python.org/dev/peps/pep-0257/
+https://www.w3schools.com/colors/colors_names.asp
+https://www.python.org/dev/peps/pep-0396/
+https://numpydoc.readthedocs.io/en/latest/format.html
+https://realpython.com/documenting-python-code/
+http://www.vintage-basic.net/games.html
+
+
+
 
 

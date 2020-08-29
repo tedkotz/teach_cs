@@ -3,9 +3,9 @@
 
 """
 
-from SimplePython import SimpleClear
-
 __author__ = "<My Name>"
+
+from SimplePython import SimpleClear
 
 
 def HelloYou():

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """ A graphical toy that animates a block that bounces off the wall makign a little sound with each collision """
 
+__author__ = "<My Name>"
+
 from SimplePython import *
 from time import sleep
-
-__author__ = "<My Name>"
 
 
 def BouncingBall():

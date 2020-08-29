@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """ """
-from SimplePython import *
-from datetime import datetime
 
 __author__ = "<My Name>"
+
+from SimplePython import *
+from datetime import datetime
 
 def conversation():
     """ """
