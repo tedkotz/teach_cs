@@ -42,8 +42,7 @@ These generally rely heavily on OOP to understand. They introduce a lot of compl
 #### Interupt or Event driven input.
 This isn't needed and can create renetance issues that are better left for future.
 
-
-Links
+### Links
 https://www.python.org/dev/peps/pep-0257/
 https://www.w3schools.com/colors/colors_names.asp
 https://www.python.org/dev/peps/pep-0396/
@@ -51,7 +50,18 @@ https://numpydoc.readthedocs.io/en/latest/format.html
 https://realpython.com/documenting-python-code/
 http://www.vintage-basic.net/games.html
 
-
+## Examples in Lesson Order
+1. [Hello World](python/HelloWorld.py)
+1. [Better Hello World](python/BetterHelloWorld.py)
+1. [Hello You](python/HelloYou.py)
+1. There are missing lessons after this point and commetns are sparce
+1. [Conversation](python/Conversation.py)
+1. [Bouncing Block](python/BouncingBall.py)
+1. [Modular Bounce](python/ModularBounce.py)
+1. [More Bouncing Blocks](python/MoreBalls.py)
+1. [Modular Physics Bounce](python/ModularPhysicsBounce.py)
+1. [Particles](python/ParticlesBounce.py)
+1. [Paddle](python/Paddle.py)
 
 
 
