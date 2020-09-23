@@ -39,7 +39,7 @@ More elements of this are likely to show up in the examples than OOP, but not re
 One goal of this course is to minimize the complexity of Math involved, but still keep Math there. One example of this is the early focus on input and variables as strings. Which when you think about is actually more inline with how computers actually interact with users.
 #### Real Graphics or Widget toolkits
 These generally rely heavily on OOP to understand. They introduce a lot of complexity that it overly tied to the specific implementation. For most of the classic BASIC games of this ilk a 360x240 16-color (really 24-bit color) display should be enough.
-#### Turle Graphics
+#### Turtle Graphics
 Turtle graphics is slow, complex and unrelated to most programming tasks likely to be encountered unless they are writing G-code by hand.
 #### Interupt or Event driven input.
 This isn't needed and can create renetance issues that are better left for future.
