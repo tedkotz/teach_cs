@@ -78,10 +78,10 @@ if __name__ == "__main__":
     SimpleGr()
 
     i=10
-    while(i>0):
+    while(root.winfo_exists() == 1):
         i=i-1
-        time.sleep(1)
         root.update()
+        time.sleep(1)
 
 
 
